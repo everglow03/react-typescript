@@ -1,22 +1,38 @@
 import React, { Component } from 'react';
+import Number from './Number';
+import { Form, Input } from './Input';
 
-class App extends Component {
-  state = {
-    counter: 0,
+interface IState {
+    counter: number;
+}
 
-  }
-  render() {
-    const { counter } = this.state;
+class App extends Component<{}, IState> {
+    state = {
+        counter: 0,
+    };
+    render() {
+        const { counter } = this.state;
 
-    return <div>{counter}</div>;
-  }
-  add = () => {
-    this.setState(prev => {
-      return {
-        coutner: prev.counter++;
-      }
-    })
-  }
+        return (
+            <div>
+                <Form><Input/></Form>
+                <Number count={counter} /> <button onClick={this.add}>add</button>
+                <button onClick={this.minus}>minus</button>
+            </div>
+        );
+    }
+    add = () => {
+        this.setState((prev) => {
+            return {
+                counter: prev.counter + 1,
+            };
+        });
+    };
+    minus = () => {
+        this.setState((prev) => {
+            return { counter: prev.counter - 1 };
+        });
+    };
 }
 
 export default App;
